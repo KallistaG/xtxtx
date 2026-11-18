@@ -4,7 +4,17 @@ A small Python app for creating a Bible-verse graphic and publishing it to a Fac
 
 > **Flow browser mode:** `--image-provider flow` opens a real Chromium browser at Flow. You sign in and confirm the page is ready; the script enters the verse prompt and attempts to click Generate/Create automatically. If its controls are not recognized, it saves `output/flow-debug.png` and `output/flow-debug.txt` and leaves the browser available for you to finish. Flow is a consumer UI that changes frequently, so result capture may still need manual help. It does not bypass login, CAPTCHAs, or Google access restrictions. Keep the browser visible and follow Google's terms. The Gemini API remains the more reliable unattended option.
 
-## Quick start
+## Windows executable
+
+A Windows build is produced by the GitHub Actions workflow `Build Windows app`. Download the `BiblePageAutomation-Windows` artifact from its successful workflow run, extract the whole folder, copy `.env.example` to `.env`, add your credentials, and launch `Start-Bible-Page-Automation.bat`. Example:
+
+```bat
+Start-Bible-Page-Automation.bat create --image-provider flow
+```
+
+Keep the whole extracted folder together: it includes the executable and the browser runtime required for Flow. The console window is intentional because the Flow workflow asks you to confirm when the browser is ready. For a one-file executable without the included browser, use the source setup below.
+
+## Quick start (from source)
 
 1. Install Python 3.11+ and dependencies:
 

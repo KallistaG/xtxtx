@@ -1,0 +1,62 @@
+name: Build Windows app
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'arena/**']
+    paths:
+      - 'bible_automation/**'
+      - 'pyproject.toml'
+      - 'requirements-build.txt'
+      - '.github/workflows/build-windows.yml'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install application and packager
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install . pyinstaller
+      - name: Install Chromium for Flow browser mode
+        run: python -m playwright install chromium
+      - name: Build executable
+        run: >-
+          pyinstaller --noconfirm --clean --onefile --console
+          --name BiblePageAutomation
+          --collect-all playwright
+          --add-data "bible_automation/verses.json;bible_automation"
+          --hidden-import apscheduler
+          run_app.py
+      - name: Package user setup files
+        shell: pwsh
+        run: |
+          Copy-Item .env.example dist/.env.example
+          Copy-Item "$env:LOCALAPPDATA\ms-playwright" dist/ms-playwright -Recurse
+          @'
+          Bible Page Automation - Windows
+
+          1. Copy .env.example to .env and fill in API credentials. Never share this file.
+          2. Run BiblePageAutomation.exe from this folder in PowerShell or Command Prompt.
+          3. Run Start-Bible-Page-Automation.bat create --image-provider flow
+          4. To create a preview with Gemini: Start-Bible-Page-Automation.bat create
+          5. Add --post only when you intend to publish to your configured Facebook Page.
+
+          The app uses a console window for prompts. Keep it open while Flow runs.
+          '@ | Set-Content dist/README-Windows.txt
+          @'
+          @echo off
+          setlocal
+          set PLAYWRIGHT_BROWSERS_PATH=%~dp0ms-playwright
+          "%~dp0BiblePageAutomation.exe" %*
+          '@ | Set-Content dist/Start-Bible-Page-Automation.bat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BiblePageAutomation-Windows
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
