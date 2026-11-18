@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bible-page-automation"
+version = "0.1.0"
+description = "Generate Bible verse graphics and optionally publish them to a Facebook Page"
+requires-python = ">=3.11"
+dependencies = [
+  "google-genai>=1.0.0",
+  "python-dotenv>=1.0.1",
+  "requests>=2.32.0",
+  "apscheduler>=3.10,<4",
+  "playwright>=1.48.0",
+]
+
+[project.scripts]
+bible-post = "bible_automation.cli:main"
+
+[tool.setuptools]
+packages = ["bible_automation"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
