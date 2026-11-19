@@ -1,0 +1,14 @@
+* { box-sizing: border-box; }
+body { margin: 0; width: 340px; color: #263128; background: #f6f4ec; font: 14px/1.5 system-ui, sans-serif; }
+main { padding: 20px; }
+.eyebrow { color: #84764e; font-size: 10px; font-weight: 800; letter-spacing: .16em; }
+h1 { margin: 5px 0 16px; font: 700 22px/1.2 Georgia, serif; }
+.verse-card { padding: 16px; border: 1px solid #e2dccb; border-radius: 12px; background: #fffefa; }
+#verseText { margin: 0 0 10px; font: 18px/1.45 Georgia, serif; }
+#reference { color: #726746; font-size: 12px; }
+button { width: 100%; min-height: 42px; border: 0; border-radius: 9px; font: 650 13px system-ui, sans-serif; cursor: pointer; }
+.secondary { margin: 10px 0; color: #384638; background: #e9e6da; }
+.primary { color: white; background: #294936; }
+button:hover { filter: brightness(.95); }
+#status { min-height: 20px; margin: 12px 0 4px; color: #315b3a; font-size: 12px; }
+.note { margin: 8px 0 0; color: #77766f; font-size: 11px; }

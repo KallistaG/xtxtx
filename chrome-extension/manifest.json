@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Bible Verse to Flow",
+  "version": "1.0.0",
+  "description": "Choose a curated KJV verse and send a poster prompt to Google Flow.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://labs.google/fx/tools/flow/*", "https://labs.google/fx/tools/flow"],
+  "action": {
+    "default_title": "Bible Verse to Flow",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://labs.google/fx/tools/flow/*", "https://labs.google/fx/tools/flow"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
