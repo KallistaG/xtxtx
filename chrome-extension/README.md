@@ -1,6 +1,6 @@
 # Bible Verse to Flow Chrome extension
 
-This extension picks a verse from the included KJV list, opens Google Flow, fills a square-poster prompt, and attempts to click the Flow generation button. It runs entirely in your browser and does not need a Gemini API key.
+This extension picks a verse from the included KJV list, opens Google Flow, tries to start a new project if needed, waits up to two minutes for Flow's prompt box, enters a square-poster prompt, and attempts to click the generation button. A status message appears on the Flow page while it works. It runs entirely in your browser and does not need a Gemini API key.
 
 ## Install in Chrome
 
